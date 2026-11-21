@@ -21,7 +21,7 @@ export default function Privacy() {
         <h2>حقوقك</h2>
         <p>يمكنك تصدير بياناتك أو حذفها في أي وقت. راجع صفحة <a className="text-brand-600 underline" href="/data-deletion">حذف البيانات</a>.</p>
         <h2>التواصل</h2>
-        <p>لأي استفسار راسلنا عبر البريد الإلكتروني المسجل في صفحة التطبيق على ميتا.</p>
+        <p>لأي استفسار راسلنا على fullcirclewali@gmail.com.</p>
       </LegalPage>
     );
   return (
@@ -40,7 +40,7 @@ export default function Privacy() {
       <h2>Your rights</h2>
       <p>You can export or delete your data at any time. See <a className="text-brand-600 underline" href="/data-deletion">Data deletion</a>.</p>
       <h2>Contact</h2>
-      <p>For any questions, email us at the contact address listed on our Meta app page.</p>
+      <p>For any questions, email us at fullcirclewali@gmail.com.</p>
     </LegalPage>
   );
 }

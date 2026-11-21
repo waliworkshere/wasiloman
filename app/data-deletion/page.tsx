@@ -11,7 +11,7 @@ export default function DataDeletion() {
         <ul>
           <li>لفصل رقم واتساب وحذف رمز الوصول: الإعدادات ← «فصل الرقم».</li>
           <li>لحذف جهات الاتصال: صفحة جهات الاتصال ← حدّدها ← «حذف».</li>
-          <li>لحذف حسابك بالكامل مع كل البيانات: راسلنا عبر البريد الإلكتروني المسجل في صفحة التطبيق، وسنحذف كل شيء خلال ٧ أيام.</li>
+          <li>لحذف حسابك بالكامل مع كل البيانات: راسلنا على fullcirclewali@gmail.com وسنحذف كل شيء خلال ٧ أيام.</li>
         </ul>
         <p>يمكنك أيضاً إزالة صلاحيات التطبيق من فيسبوك: الإعدادات ← الأمان ← تطبيقات ومواقع الأعمال ← إزالة «Wasil Oman».</p>
       </LegalPage>
@@ -22,7 +22,7 @@ export default function DataDeletion() {
       <ul>
         <li>To disconnect your WhatsApp number and delete its access token: Settings → “Disconnect”.</li>
         <li>To delete contacts: Contacts → select them → “Delete”.</li>
-        <li>To delete your whole account and all data: email us at the contact address on our Meta app page and we will delete everything within 7 days.</li>
+        <li>To delete your whole account and all data: email us at fullcirclewali@gmail.com and we will delete everything within 7 days.</li>
       </ul>
       <p>You can also remove the app's access from Facebook: Settings → Security → Business Integrations → remove “Wasil Oman”.</p>
     </LegalPage>

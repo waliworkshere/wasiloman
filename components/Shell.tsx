@@ -127,8 +127,8 @@ export function Shell({ children }: { children: ReactNode }) {
         <Link href="/settings" onClick={() => setOpen(false)} className={`flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium ${path.startsWith("/settings") ? "bg-white/[0.08] text-white" : "text-ink-300 hover:text-white"}`}>
           <Settings size={17} strokeWidth={1.8} /> {tr("Settings", "الإعدادات")}
         </Link>
-        <a href="https://wa.me/96891234567" target="_blank" rel="noreferrer" className="flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium text-ink-300 hover:text-white">
-          <LifeBuoy size={17} strokeWidth={1.8} /> {tr("Help on WhatsApp", "المساعدة عبر واتساب")}
+        <a href="mailto:fullcirclewali@gmail.com" className="flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium text-ink-300 hover:text-white">
+          <LifeBuoy size={17} strokeWidth={1.8} /> {tr("Email support", "الدعم عبر البريد")}
         </a>
         <div className="mt-2 flex items-center gap-2.5 rounded-md px-2.5 py-2">
           <div className="grid h-7 w-7 place-items-center rounded-full bg-ink-700 text-2xs font-bold text-white">{(email || "?")[0].toUpperCase()}</div>

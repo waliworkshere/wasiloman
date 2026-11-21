@@ -17,7 +17,7 @@ export function usePlanFeatures() {
     tr("Excel / CSV contact import", "استيراد جهات الاتصال من إكسل"),
     tr("Automatic STOP / unsubscribe handling", "إلغاء الاشتراك تلقائياً عند «إيقاف»"),
     tr("Arabic and English", "عربي وإنجليزي"),
-    tr("Support on WhatsApp", "دعم عبر واتساب"),
+    tr("Email support", "دعم عبر البريد الإلكتروني"),
   ];
 }
 
