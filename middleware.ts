@@ -4,6 +4,8 @@ import { NextResponse, type NextRequest } from "next/server";
 const PROTECTED = ["/dashboard", "/connect", "/contacts", "/templates", "/broadcasts", "/inbox", "/bots", "/settings"];
 
 export async function middleware(req: NextRequest) {
+  // Demo visitors browse sample data without an account
+  if (req.cookies.get("wasil_demo")?.value === "1") return NextResponse.next();
   let res = NextResponse.next({ request: req });
   const sb = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
     cookies: {

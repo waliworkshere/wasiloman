@@ -19,9 +19,7 @@ export async function GET(req: Request) {
   return new Response("Forbidden", { status: 403 });
 }
 
-function validSignature(raw: string, header: string | null) {
-  const secret = process.env.META_APP_SECRET;
-  if (!secret) return true;
+function validSignature(raw: string, header: string | null, secret: string) {
   if (!header) return false;
   const expected = "sha256=" + crypto.createHmac("sha256", secret).update(raw).digest("hex");
   try {
@@ -40,9 +38,7 @@ const LOWER: Record<string, string[]> = {
 
 export async function POST(req: Request) {
   const raw = await req.text();
-  if (!validSignature(raw, req.headers.get("x-hub-signature-256"))) {
-    return new Response("Invalid signature", { status: 401 });
-  }
+  const signature = req.headers.get("x-hub-signature-256");
   const sb = supabaseAdmin();
   let payload: any;
   try {
@@ -59,6 +55,12 @@ export async function POST(req: Request) {
       if (!phoneId) continue;
       const { data: acct } = await sb.from("whatsapp_accounts").select("*").eq("phone_number_id", phoneId).maybeSingle();
       if (!acct) continue;
+
+      // Each business uses its own Meta app. If they gave us their App Secret, reject anything not signed by Meta.
+      if (acct.app_secret && !validSignature(raw, signature, acct.app_secret)) {
+        console.warn("webhook: bad signature for", phoneId);
+        continue;
+      }
 
       try {
         // ----- Delivery / read receipts -----

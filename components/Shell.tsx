@@ -1,78 +1,134 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, type ReactNode } from "react";
-import { LayoutDashboard, Users, FileText, Send, MessagesSquare, Bot, Settings, LogOut, Menu, X, Plug } from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
+import { LayoutGrid, Users, FileText, Send, MessagesSquare, Bot, Settings, LogOut, Menu, X, Plug, LifeBuoy, Sparkles, Plus } from "lucide-react";
 import { Logo } from "./Logo";
 import { LangToggle } from "./ui";
 import { useLang } from "@/lib/i18n";
 import { useAccount } from "./AccountProvider";
 import { supabaseBrowser } from "@/lib/supabase/client";
-import { formatPhone } from "@/lib/phone";
+import { exitDemo } from "@/lib/demo";
 
 export function Shell({ children }: { children: ReactNode }) {
   const { tr } = useLang();
-  const { account, email } = useAccount();
+  const { account, email, demo } = useAccount();
   const path = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [unread, setUnread] = useState(0);
 
-  const nav = [
-    { href: "/dashboard", icon: LayoutDashboard, label: tr("Home", "الرئيسية") },
-    { href: "/contacts", icon: Users, label: tr("Contacts", "جهات الاتصال") },
-    { href: "/templates", icon: FileText, label: tr("Message Templates", "قوالب الرسائل") },
-    { href: "/broadcasts", icon: Send, label: tr("Bulk Send", "إرسال جماعي") },
-    { href: "/inbox", icon: MessagesSquare, label: tr("Inbox", "المحادثات") },
-    { href: "/bots", icon: Bot, label: tr("Auto-Reply Bots", "الردود الآلية") },
-    { href: "/settings", icon: Settings, label: tr("Settings", "الإعدادات") },
+  useEffect(() => {
+    supabaseBrowser()
+      .from("contacts")
+      .select("unread")
+      .not("last_message_at", "is", null)
+      .then(({ data }: { data: { unread: number }[] | null }) => setUnread((data || []).reduce((a, c) => a + (c.unread || 0), 0)));
+  }, [path]);
+
+  const groups = [
+    { items: [{ href: "/dashboard", icon: LayoutGrid, label: tr("Overview", "نظرة عامة") }] },
+    {
+      title: tr("Messaging", "المراسلة"),
+      items: [
+        { href: "/broadcasts", icon: Send, label: tr("Bulk send", "إرسال جماعي") },
+        { href: "/templates", icon: FileText, label: tr("Templates", "القوالب") },
+        { href: "/inbox", icon: MessagesSquare, label: tr("Inbox", "المحادثات"), count: unread },
+      ],
+    },
+    { title: tr("Audience", "الجمهور"), items: [{ href: "/contacts", icon: Users, label: tr("Contacts", "جهات الاتصال") }] },
+    { title: tr("Automation", "الأتمتة"), items: [{ href: "/bots", icon: Bot, label: tr("Auto-reply bots", "الردود الآلية") }] },
   ];
 
+  const titles: Record<string, string> = {
+    "/dashboard": tr("Overview", "نظرة عامة"),
+    "/broadcasts": tr("Bulk send", "إرسال جماعي"),
+    "/templates": tr("Templates", "القوالب"),
+    "/inbox": tr("Inbox", "المحادثات"),
+    "/contacts": tr("Contacts", "جهات الاتصال"),
+    "/bots": tr("Auto-reply bots", "الردود الآلية"),
+    "/settings": tr("Settings", "الإعدادات"),
+    "/connect": tr("Connect WhatsApp", "ربط واتساب"),
+  };
+  const section = Object.keys(titles).find((k) => path.startsWith(k));
+
   const logout = async () => {
+    if (demo) {
+      exitDemo();
+      window.location.href = "/";
+      return;
+    }
     await supabaseBrowser().auth.signOut();
     router.push("/login");
   };
 
+  const initial = (account?.verified_name || email || "W")[0].toUpperCase();
+
   const sidebar = (
-    <div className="flex h-full flex-col">
-      <div className="px-5 py-5">
-        <Logo light />
+    <div className="flex h-full flex-col text-[13.5px]">
+      <div className="px-4 pb-4 pt-5">
+        <Logo light size={32} />
       </div>
-      <nav className="flex-1 space-y-1 px-3">
-        {nav.map((n) => {
-          const active = path.startsWith(n.href);
-          return (
-            <Link
-              key={n.href}
-              href={n.href}
-              onClick={() => setOpen(false)}
-              className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${
-                active ? "bg-white/15 text-white" : "text-brand-100 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              <n.icon size={18} />
-              {n.label}
-            </Link>
-          );
-        })}
-      </nav>
-      <div className="m-3 rounded-2xl bg-white/10 p-3 text-xs text-brand-100">
+
+      {/* Workspace / number */}
+      <div className="mx-3 mb-4 rounded-lg border border-white/10 bg-white/[0.04] p-3">
         {account ? (
-          <>
-            <div className="flex items-center gap-1.5 font-semibold text-white">
-              <span className="h-2 w-2 rounded-full bg-emerald-400" /> {tr("WhatsApp connected", "واتساب متصل")}
+          <div className="flex items-center gap-2.5">
+            <div className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-gold-400 text-sm font-bold text-ink-950">{initial}</div>
+            <div className="min-w-0">
+              <div className="truncate font-semibold text-white">{account.verified_name}</div>
+              <div className="flex items-center gap-1.5 text-2xs text-ink-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-300" />
+                <span dir="ltr" className="num truncate">{account.display_phone}</span>
+              </div>
             </div>
-            <div className="mt-1 truncate" dir="ltr">
-              {account.display_phone || formatPhone(account.phone_number_id)}
-            </div>
-          </>
+          </div>
         ) : (
-          <Link href="/connect" className="flex items-center gap-2 font-semibold text-gold-400">
-            <Plug size={14} /> {tr("Connect WhatsApp", "اربط واتساب")}
+          <Link href="/connect" onClick={() => setOpen(false)} className="flex items-center gap-2 font-semibold text-gold-400">
+            <Plug size={15} /> {tr("Connect WhatsApp", "اربط واتساب")}
           </Link>
         )}
-        <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-3">
-          <span className="truncate">{email}</span>
-          <button onClick={logout} title={tr("Log out", "تسجيل الخروج")} className="rounded-lg p-1.5 hover:bg-white/10">
+      </div>
+
+      <nav className="flex-1 space-y-5 overflow-y-auto px-3">
+        {groups.map((g, gi) => (
+          <div key={gi}>
+            {g.title && <div className="mb-1.5 px-2.5 text-2xs font-medium text-ink-400">{g.title}</div>}
+            <div className="space-y-0.5">
+              {g.items.map((n: any) => {
+                const active = path.startsWith(n.href);
+                return (
+                  <Link
+                    key={n.href}
+                    href={n.href}
+                    onClick={() => setOpen(false)}
+                    className={`group relative flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium transition-colors ${
+                      active ? "bg-white/[0.08] text-white" : "text-ink-300 hover:bg-white/[0.04] hover:text-white"
+                    }`}
+                  >
+                    {active && <span className="absolute inset-y-1.5 start-0 w-[3px] rounded-full bg-brand-300" />}
+                    <n.icon size={17} strokeWidth={active ? 2.2 : 1.8} className={active ? "text-brand-300" : ""} />
+                    <span className="flex-1">{n.label}</span>
+                    {n.count > 0 && <span className="num rounded-full bg-brand-500 px-1.5 text-2xs font-bold text-white">{n.count}</span>}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </nav>
+
+      <div className="space-y-0.5 border-t border-white/10 p-3">
+        <Link href="/settings" onClick={() => setOpen(false)} className={`flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium ${path.startsWith("/settings") ? "bg-white/[0.08] text-white" : "text-ink-300 hover:text-white"}`}>
+          <Settings size={17} strokeWidth={1.8} /> {tr("Settings", "الإعدادات")}
+        </Link>
+        <a href="https://wa.me/96891234567" target="_blank" rel="noreferrer" className="flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium text-ink-300 hover:text-white">
+          <LifeBuoy size={17} strokeWidth={1.8} /> {tr("Help on WhatsApp", "المساعدة عبر واتساب")}
+        </a>
+        <div className="mt-2 flex items-center gap-2.5 rounded-md px-2.5 py-2">
+          <div className="grid h-7 w-7 place-items-center rounded-full bg-ink-700 text-2xs font-bold text-white">{(email || "?")[0].toUpperCase()}</div>
+          <span className="min-w-0 flex-1 truncate text-xs text-ink-300">{email}</span>
+          <button onClick={logout} aria-label={tr("Log out", "تسجيل الخروج")} title={tr("Log out", "تسجيل الخروج")} className="rounded-md p-1.5 text-ink-400 hover:bg-white/10 hover:text-white">
             <LogOut size={15} />
           </button>
         </div>
@@ -82,24 +138,41 @@ export function Shell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen lg:flex">
-      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 bg-brand-800 lg:block">{sidebar}</aside>
+      <div className="hidden w-[248px] shrink-0 bg-ink-950 lg:block">
+        <aside className="sticky top-0 h-screen">{sidebar}</aside>
+      </div>
       {open && (
         <div className="fixed inset-0 z-40 lg:hidden" onClick={() => setOpen(false)}>
-          <div className="absolute inset-0 bg-ink-900/40" />
-          <aside className="absolute inset-y-0 start-0 w-64 bg-brand-800" onClick={(e) => e.stopPropagation()}>
+          <div className="absolute inset-0 bg-ink-950/50" />
+          <aside className="absolute inset-y-0 start-0 w-[260px] bg-ink-950" onClick={(e) => e.stopPropagation()}>
             {sidebar}
           </aside>
         </div>
       )}
+
       <div className="min-w-0 flex-1">
-        <header className="sticky top-0 z-30 flex items-center justify-between border-b border-sand-200 bg-sand-50/90 px-4 py-3 backdrop-blur lg:px-8">
-          <button className="btn-ghost p-2 lg:hidden" onClick={() => setOpen(!open)}>
+        {demo && (
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 bg-gold-400 px-4 py-2 text-[13px] font-medium text-ink-950">
+            <span className="flex items-center gap-1.5"><Sparkles size={14} /> {tr("You're exploring a demo workspace with sample data. Nothing is really sent.", "أنت تتصفح مساحة تجريبية ببيانات نموذجية. لا يتم إرسال أي شيء فعلياً.")}</span>
+            <Link href="/login?mode=signup" onClick={() => exitDemo()} className="rounded-md bg-ink-950 px-2.5 py-1 text-xs font-semibold text-white hover:bg-ink-800">
+              {tr("Create your free account", "أنشئ حسابك المجاني")}
+            </Link>
+          </div>
+        )}
+        <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-sand-200 bg-white/85 px-4 backdrop-blur lg:px-8">
+          <button className="btn-ghost -ms-2 p-2 lg:hidden" aria-label="Menu" onClick={() => setOpen(!open)}>
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
-          <div className="hidden text-sm text-ink-500 lg:block">{tr("Marhaba 👋", "مرحباً 👋")}</div>
+          <div className="text-[15px] font-semibold">{section ? titles[section] : ""}</div>
+          <div className="flex-1" />
           <LangToggle />
+          {!path.startsWith("/broadcasts/new") && (
+            <Link href="/broadcasts/new" className="btn-primary hidden py-1.5 sm:inline-flex">
+              <Plus size={15} /> {tr("New bulk message", "رسالة جماعية جديدة")}
+            </Link>
+          )}
         </header>
-        <main className="mx-auto max-w-6xl px-4 py-8 lg:px-8">{children}</main>
+        <main className="mx-auto max-w-[1200px] px-4 py-7 lg:px-8">{children}</main>
       </div>
     </div>
   );

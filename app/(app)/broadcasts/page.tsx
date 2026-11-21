@@ -39,7 +39,7 @@ export default function BroadcastsPage() {
       ) : (
         <div className="card overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-sand-50 text-xs uppercase text-ink-400">
+            <thead className="bg-sand-50 text-xs font-medium text-ink-400">
               <tr>
                 <th className="p-3 text-start">{tr("Name", "الاسم")}</th>
                 <th className="p-3 text-start">{tr("Status", "الحالة")}</th>

@@ -12,7 +12,9 @@ create table if not exists whatsapp_accounts (
   display_phone text,
   verified_name text,
   access_token text not null,
-  connected_via text not null default 'facebook',
+  app_id text,
+  app_secret text,
+  connected_via text not null default 'manual',
   created_at timestamptz not null default now()
 );
 

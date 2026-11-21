@@ -120,7 +120,7 @@ export default function ContactsPage() {
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-sand-50 text-start text-xs uppercase text-ink-400">
+              <thead className="bg-sand-50 text-start text-xs font-medium text-ink-400">
                 <tr>
                   <th className="w-10 p-3">
                     <input type="checkbox" checked={selected.size > 0 && selected.size === filtered.length} onChange={toggleAll} />

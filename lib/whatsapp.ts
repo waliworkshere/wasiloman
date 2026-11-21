@@ -9,6 +9,8 @@ export type WaAccount = {
   access_token: string;
   display_phone?: string | null;
   verified_name?: string | null;
+  app_id?: string | null;
+  app_secret?: string | null;
 };
 
 export class GraphError extends Error {
@@ -35,15 +37,13 @@ export async function graph<T = any>(path: string, token: string, init: { method
 }
 
 // ---------- Onboarding ----------
-export async function exchangeCodeForToken(code: string) {
-  const url = new URL(`${BASE}/oauth/access_token`);
-  url.searchParams.set("client_id", process.env.NEXT_PUBLIC_META_APP_ID!);
-  url.searchParams.set("client_secret", process.env.META_APP_SECRET!);
-  url.searchParams.set("code", code);
-  const res = await fetch(url, { cache: "no-store" });
-  const json = await res.json();
-  if (!res.ok || json.error) throw new GraphError(json.error?.message || "Could not exchange Facebook code");
-  return json.access_token as string;
+/** Reads a token's details (app, expiry, which WhatsApp accounts it can access). A token can inspect itself. */
+export async function inspectToken(token: string) {
+  const res = await graph<{ data: { app_id: string; is_valid: boolean; expires_at: number; granular_scopes?: { scope: string; target_ids?: string[] }[] } }>(
+    `debug_token?input_token=${encodeURIComponent(token)}`,
+    token
+  );
+  return res.data;
 }
 
 export async function getPhoneInfo(phoneNumberId: string, token: string) {
@@ -96,7 +96,8 @@ export async function deleteTemplate(acct: WaAccount, name: string) {
 
 /** Uploads a sample image for a template header (Resumable Upload API) and returns its handle. */
 export async function uploadTemplateSample(acct: WaAccount, file: Blob, fileName: string) {
-  const appId = process.env.NEXT_PUBLIC_META_APP_ID!;
+  const appId = acct.app_id || process.env.NEXT_PUBLIC_META_APP_ID;
+  if (!appId) throw new GraphError("Could not find your Meta App ID. Reconnect your number in Settings.");
   const start = await graph<{ id: string }>(
     `${appId}/uploads?file_name=${encodeURIComponent(fileName)}&file_length=${file.size}&file_type=${encodeURIComponent(file.type)}`,
     acct.access_token,
