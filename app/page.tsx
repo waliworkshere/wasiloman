@@ -35,7 +35,7 @@ export default function Landing() {
       {/* Hero */}
       <section className="bg-ink-950 text-white">
         <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <Logo light />
+          <Logo light size={42} />
           <div className="flex items-center gap-2">
             <LangToggle className="border-white/10 bg-white/5 [&_button[aria-pressed=false]]:text-ink-300" />
             <a href="#pricing" className="btn hidden px-3 text-ink-300 hover:text-white sm:inline-flex">{tr("Pricing", "الأسعار")}</a>
@@ -154,7 +154,7 @@ export default function Landing() {
 
       <footer className="border-t border-sand-200 bg-white py-8">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 text-sm text-ink-400">
-          <Logo size={26} />
+          <Logo size={32} />
           <div className="flex gap-5">
             <Link href="/privacy" className="hover:text-ink-900">{tr("Privacy policy", "سياسة الخصوصية")}</Link>
             <Link href="/data-deletion" className="hover:text-ink-900">{tr("Data deletion", "حذف البيانات")}</Link>

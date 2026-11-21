@@ -8,7 +8,7 @@ export function LegalPage({ title, children }: { title: string; children: ReactN
   return (
     <div className="min-h-screen">
       <header className="mx-auto flex max-w-3xl items-center justify-between px-6 py-5">
-        <Link href="/"><Logo /></Link>
+        <Link href="/"><Logo size={40} /></Link>
         <LangToggle />
       </header>
       <main className="mx-auto max-w-3xl px-6 pb-20">
