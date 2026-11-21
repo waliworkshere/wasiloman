@@ -6,6 +6,7 @@ import { Logo } from "@/components/Logo";
 import { LangToggle } from "@/components/ui";
 import { useLang } from "@/lib/i18n";
 import { enterDemo } from "@/lib/demo";
+import { PricingCard } from "@/components/PricingCard";
 
 export default function Landing() {
   const { tr } = useLang();
@@ -37,6 +38,7 @@ export default function Landing() {
           <Logo light />
           <div className="flex items-center gap-2">
             <LangToggle className="border-white/10 bg-white/5 [&_button[aria-pressed=false]]:text-ink-300" />
+            <a href="#pricing" className="btn hidden px-3 text-ink-300 hover:text-white sm:inline-flex">{tr("Pricing", "الأسعار")}</a>
             <Link href="/login" className="btn px-3 text-ink-300 hover:text-white">{tr("Log in", "دخول")}</Link>
           </div>
         </header>
@@ -139,6 +141,14 @@ export default function Landing() {
             </div>
             <button onClick={demo} className="btn-primary px-5 py-3"><Play size={16} fill="currentColor" />{tr("Open the demo", "افتح العرض التجريبي")}</button>
           </div>
+        </div>
+      </section>
+
+      <section id="pricing" className="bg-ink-950 py-20 text-white">
+        <div className="mx-auto max-w-4xl px-6">
+          <h2 className="text-[28px] font-bold tracking-[-0.02em]">{tr("One simple plan", "خطة واحدة بسيطة")}</h2>
+          <p className="mt-2 max-w-xl text-[15px] text-ink-300">{tr("No message limits, no contact limits, no feature tiers.", "بدون حدود للرسائل أو جهات الاتصال، وبدون مستويات للميزات.")}</p>
+          <div className="mt-8"><PricingCard dark /></div>
         </div>
       </section>
 

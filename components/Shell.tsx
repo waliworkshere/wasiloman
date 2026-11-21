@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
-import { LayoutGrid, Users, FileText, Send, MessagesSquare, Bot, Settings, LogOut, Menu, X, Plug, LifeBuoy, Sparkles, Plus } from "lucide-react";
+import { LayoutGrid, Users, FileText, Send, MessagesSquare, Bot, Settings, LogOut, Menu, X, Plug, LifeBuoy, Sparkles, Plus, CreditCard } from "lucide-react";
 import { Logo } from "./Logo";
 import { LangToggle } from "./ui";
 import { useLang } from "@/lib/i18n";
@@ -49,6 +49,7 @@ export function Shell({ children }: { children: ReactNode }) {
     "/bots": tr("Auto-reply bots", "الردود الآلية"),
     "/settings": tr("Settings", "الإعدادات"),
     "/connect": tr("Connect WhatsApp", "ربط واتساب"),
+    "/billing": tr("Plan and billing", "الخطة والفوترة"),
   };
   const section = Object.keys(titles).find((k) => path.startsWith(k));
 
@@ -119,6 +120,10 @@ export function Shell({ children }: { children: ReactNode }) {
       </nav>
 
       <div className="space-y-0.5 border-t border-white/10 p-3">
+        <Link href="/billing" onClick={() => setOpen(false)} className={`flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium ${path.startsWith("/billing") ? "bg-white/[0.08] text-white" : "text-ink-300 hover:text-white"}`}>
+          <CreditCard size={17} strokeWidth={1.8} /> <span className="flex-1">{tr("Plan and billing", "الخطة والفوترة")}</span>
+          <span className="rounded bg-gold-400/15 px-1.5 text-2xs font-semibold text-gold-400">{tr("Unlimited", "غير محدود")}</span>
+        </Link>
         <Link href="/settings" onClick={() => setOpen(false)} className={`flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium ${path.startsWith("/settings") ? "bg-white/[0.08] text-white" : "text-ink-300 hover:text-white"}`}>
           <Settings size={17} strokeWidth={1.8} /> {tr("Settings", "الإعدادات")}
         </Link>

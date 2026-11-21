@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PROTECTED = ["/dashboard", "/connect", "/contacts", "/templates", "/broadcasts", "/inbox", "/bots", "/settings"];
+const PROTECTED = ["/dashboard", "/connect", "/contacts", "/templates", "/broadcasts", "/inbox", "/bots", "/settings", "/billing"];
 
 export async function middleware(req: NextRequest) {
   // Demo visitors browse sample data without an account
