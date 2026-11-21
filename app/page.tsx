@@ -99,7 +99,13 @@ export default function Landing() {
         </div>
       </section>
 
-      <footer className="py-10 text-center text-sm text-ink-400">© {new Date().getFullYear()} Wasil Oman · واصل عُمان</footer>
+      <footer className="py-10 text-center text-sm text-ink-400">
+        <div>© {new Date().getFullYear()} Wasil Oman · واصل عُمان</div>
+        <div className="mt-2 flex justify-center gap-4">
+          <Link href="/privacy" className="hover:text-ink-700">{tr("Privacy Policy", "سياسة الخصوصية")}</Link>
+          <Link href="/data-deletion" className="hover:text-ink-700">{tr("Data Deletion", "حذف البيانات")}</Link>
+        </div>
+      </footer>
     </div>
   );
 }
