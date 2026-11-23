@@ -46,7 +46,7 @@ function LoginForm() {
   return (
     <div className="grid min-h-screen bg-white lg:grid-cols-2">
       <div className="hidden flex-col justify-between bg-ink-950 p-12 text-white lg:flex">
-        <Logo light size={46} />
+        <Logo light size={30} />
         <div>
           <h2 className="max-w-md text-[34px] font-bold leading-tight tracking-[-0.02em]">{tr("Your customers are on WhatsApp. Now you are too.", "عملاؤك على واتساب. والآن أنت أيضاً.")}</h2>
           <p className="mt-4 text-ink-300">{tr("Send offers to hundreds of customers and let bots answer questions for you.", "أرسل العروض لمئات العملاء ودع الردود الآلية تجيب عنك.")}</p>

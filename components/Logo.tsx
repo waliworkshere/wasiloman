@@ -1,17 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 
-/** The square app icon (the ن with the WhatsApp bubble) */
-export function LogoMark({ size = 34 }: { size?: number }) {
-  return <img src="/icon.png" alt="" width={size} height={size} className="shrink-0 rounded-[22%]" />;
+/** The bubble mark on its own (square app icon look when boxed) */
+export function LogoMark({ size = 34, light = false }: { size?: number; light?: boolean }) {
+  return <img src={light ? "/brand/mark-white.svg" : "/brand/mark.svg"} alt="" width={size} height={size} className="shrink-0" />;
 }
 
-/** The واصل عُمان wordmark, with a small Latin name underneath */
-export function Logo({ light = false, size = 34 }: { light?: boolean; size?: number }) {
-  const h = Math.round(size * 1.05);
+/** WasilOman: bubble mark + wordmark. `size` is the mark's height in px. */
+export function Logo({ light = false, size = 30 }: { light?: boolean; size?: number }) {
+  const word = Math.round(size * 0.66);
   return (
-    <div className="flex flex-col items-start gap-0.5">
-      <img src="/logo.png" alt="Wasil Oman — واصل عُمان" height={h} width={Math.round(h * (900 / 228))} style={{ height: h, width: "auto" }} />
-      <span className={`ps-0.5 text-[10.5px] font-semibold tracking-[0.02em] ${light ? "text-ink-300" : "text-ink-400"}`}>Wasil Oman</span>
-    </div>
+    <span className="inline-flex items-center gap-[0.3em]" style={{ fontSize: size }} dir="ltr">
+      <LogoMark size={size} light={light} />
+      <img
+        src={light ? "/brand/wordmark-white.png" : "/brand/wordmark-black.png"}
+        alt="WasilOman"
+        height={word}
+        width={Math.round(word * (1200 / 195))}
+        style={{ height: word, width: "auto" }}
+      />
+    </span>
   );
 }

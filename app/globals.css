@@ -4,23 +4,26 @@
 
 :root { color-scheme: light; }
 html[lang="ar"] body { font-family: var(--font-arabic), var(--font-latin), system-ui, sans-serif; }
-body { @apply bg-canvas text-ink-900 antialiased; font-feature-settings: "ss01", "cv11"; }
-::selection { @apply bg-brand-100 text-brand-900; }
-:focus-visible { @apply outline-none ring-2 ring-brand-400 ring-offset-2 ring-offset-white; }
+body { @apply bg-canvas text-ink-900 antialiased; }
+::selection { background: #000; color: #fff; }
+:focus-visible { @apply outline-none ring-2 ring-black ring-offset-2 ring-offset-white; }
 
 @layer components {
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-[13.5px] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
-  .btn-primary { @apply btn bg-brand-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] hover:bg-brand-700; }
-  .btn-dark { @apply btn bg-ink-900 text-white hover:bg-ink-800; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-[13.5px] font-medium transition-[background-color,border-color,color,transform] duration-150 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply btn bg-black text-white hover:bg-ink-700; }
+  .btn-dark { @apply btn bg-black text-white hover:bg-ink-700; }
   .btn-secondary { @apply btn border border-sand-200 bg-white text-ink-700 hover:border-sand-300 hover:bg-sand-50; }
   .btn-ghost { @apply btn text-ink-500 hover:bg-sand-100 hover:text-ink-900; }
   .btn-danger { @apply btn border border-red-200 bg-white text-red-600 hover:bg-red-50; }
-  .card { @apply rounded-xl border border-sand-200 bg-white shadow-card; }
-  .input { @apply w-full rounded-lg border border-sand-200 bg-white px-3 py-2 text-sm text-ink-900 outline-none transition placeholder:text-ink-300 focus:border-brand-400 focus:ring-4 focus:ring-brand-100; }
+  .card { @apply rounded-xl border border-sand-200 bg-white; }
+  .input { @apply w-full rounded-lg border border-sand-200 bg-white px-3 py-2 text-sm text-ink-900 outline-none transition placeholder:text-ink-300 focus:border-black focus:ring-4 focus:ring-black/5; }
   .label { @apply mb-1.5 block text-[13px] font-semibold text-ink-700; }
   .hint { @apply mt-1.5 text-xs text-ink-400; }
   .badge { @apply inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-semibold; }
   .num { font-variant-numeric: tabular-nums; }
+  .photo { @apply overflow-hidden bg-sand-200; }
+  .photo img { @apply h-full w-full object-cover grayscale contrast-[1.06] transition-transform duration-500 ease-out; }
+  .photo:hover img { transform: scale(1.025); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -30,3 +33,11 @@ body { @apply bg-canvas text-ink-900 antialiased; font-feature-settings: "ss01",
 /* React Flow tweaks */
 .react-flow__attribution { display: none; }
 .react-flow__handle { width: 12px; height: 12px; border: 2px solid white; }
+
+/* hero entrance, once on load */
+@keyframes enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.enter > * { animation: enter 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.enter > *:nth-child(2) { animation-delay: 0.08s; }
+.enter > *:nth-child(3) { animation-delay: 0.16s; }
+.enter > *:nth-child(4) { animation-delay: 0.24s; }
+.enter > *:nth-child(5) { animation-delay: 0.32s; }

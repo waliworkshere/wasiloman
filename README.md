@@ -1,4 +1,4 @@
-# Wasil Oman · واصل عُمان
+# WasilOman · واصل عُمان
 
 Bulk WhatsApp marketing and auto-reply bots for businesses in Oman. It uses the **official WhatsApp Cloud API**, and the setup follows the same flow as WANotifier.
 

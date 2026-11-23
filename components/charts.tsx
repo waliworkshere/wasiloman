@@ -47,8 +47,8 @@ export function TimeChart({ data, series, height = H }: { data: Point[]; series:
         </defs>
         {ticks.map((t) => (
           <g key={t}>
-            <line x1={PAD.l} x2={W - PAD.r} y1={y(t)} y2={y(t)} stroke="#E3E8E6" strokeDasharray={t === 0 ? "" : "3 4"} />
-            <text x={PAD.l - 8} y={y(t) + 4} textAnchor="end" fontSize="11" fill="#7C8A88" className="num">{t >= 1000 ? `${(t / 1000).toFixed(t % 1000 ? 1 : 0)}k` : t}</text>
+            <line x1={PAD.l} x2={W - PAD.r} y1={y(t)} y2={y(t)} stroke="#ECECEB" strokeDasharray={t === 0 ? "" : "3 4"} />
+            <text x={PAD.l - 8} y={y(t) + 4} textAnchor="end" fontSize="11" fill="#8A8A88" className="num">{t >= 1000 ? `${(t / 1000).toFixed(t % 1000 ? 1 : 0)}k` : t}</text>
           </g>
         ))}
         {bars.length > 0 && [0, 0.5, 1].map((t) => (
@@ -58,7 +58,7 @@ export function TimeChart({ data, series, height = H }: { data: Point[]; series:
           const step = Math.ceil(data.length / 7);
           return (i % step === 0 && i < data.length - step / 2) || i === data.length - 1;
         }).map((show, i) => show && (
-          <text key={i} x={x(i)} y={h - 6} textAnchor={i === data.length - 1 ? "end" : i === 0 ? "start" : "middle"} fontSize="11" fill="#7C8A88">{data[i].label}</text>
+          <text key={i} x={x(i)} y={h - 6} textAnchor={i === data.length - 1 ? "end" : i === 0 ? "start" : "middle"} fontSize="11" fill="#8A8A88">{data[i].label}</text>
         ))}
         {series.filter((s) => s.kind === "bar").map((s, si) =>
           data.map((d, i) => {
@@ -77,7 +77,7 @@ export function TimeChart({ data, series, height = H }: { data: Point[]; series:
         ))}
         {hover !== null && (
           <g>
-            <line x1={x(hover)} x2={x(hover)} y1={PAD.t} y2={PAD.t + innerH} stroke="#0E1B22" strokeOpacity="0.15" />
+            <line x1={x(hover)} x2={x(hover)} y1={PAD.t} y2={PAD.t + innerH} stroke="#000" strokeOpacity="0.15" />
             {series.filter((s) => s.kind !== "bar").map((s) => (
               <circle key={s.key} cx={x(hover)} cy={y(Number(data[hover][s.key]) || 0)} r="4" fill="white" stroke={s.color} strokeWidth="2" />
             ))}
@@ -105,7 +105,7 @@ export function TimeChart({ data, series, height = H }: { data: Point[]; series:
   );
 }
 
-export function Sparkline({ values, color = "#0B7A5C" }: { values: number[]; color?: string }) {
+export function Sparkline({ values, color = "#000" }: { values: number[]; color?: string }) {
   const w = 72, h = 26;
   const max = Math.max(1, ...values);
   const pts = values.map((v, i) => `${(i / Math.max(1, values.length - 1)) * w},${h - 2 - (v / max) * (h - 4)}`).join(" ");

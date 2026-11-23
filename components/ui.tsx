@@ -13,7 +13,7 @@ export function LangToggle({ className = "" }: { className?: string }) {
           key={l}
           onClick={() => setLang(l)}
           aria-pressed={lang === l}
-          className={`rounded-md px-2.5 py-1 transition-colors ${lang === l ? "bg-white text-ink-900 shadow-card" : "text-ink-400 hover:text-ink-900"}`}
+          className={`rounded-md px-2.5 py-1 transition-colors ${lang === l ? "bg-white text-black shadow-[0_1px_2px_rgba(0,0,0,0.12)]" : "text-ink-400 hover:text-black"}`}
           style={l === "ar" ? { fontFamily: "var(--font-arabic)" } : undefined}
         >
           {l === "en" ? "EN" : "عربي"}
@@ -38,7 +38,7 @@ export function PageHeader({ title, subtitle, action }: { title: string; subtitl
 export function Empty({ icon, title, text, action }: { icon: ReactNode; title: string; text: string; action?: ReactNode }) {
   return (
     <div className="card flex flex-col items-center border-dashed px-6 py-16 text-center">
-      <div className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-600">{icon}</div>
+      <div className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-sand-100 text-black">{icon}</div>
       <h3 className="text-base font-semibold">{title}</h3>
       <p className="mt-1 max-w-md text-sm text-ink-500">{text}</p>
       {action && <div className="mt-5">{action}</div>}
@@ -89,9 +89,9 @@ const STATUS_TONE: Record<string, string> = {
   REJECTED: "red", failed: "red", PAUSED: "red", DISABLED: "red",
 };
 const TONES: Record<string, [string, string]> = {
-  green: ["bg-brand-50 text-brand-700 ring-brand-200/60", "bg-brand-500"],
+  green: ["bg-emerald-50 text-emerald-800 ring-emerald-200/70", "bg-emerald-500"],
   blue: ["bg-sky-50 text-sky-700 ring-sky-200/60", "bg-sky-500"],
-  amber: ["bg-gold-50 text-gold-600 ring-gold-100", "bg-gold-400"],
+  amber: ["bg-amber-50 text-amber-800 ring-amber-200/70", "bg-amber-500"],
   violet: ["bg-violet-50 text-violet-700 ring-violet-200/60", "bg-violet-500"],
   grey: ["bg-sand-100 text-ink-500 ring-sand-200", "bg-ink-300"],
   red: ["bg-red-50 text-red-700 ring-red-200/60", "bg-red-500"],

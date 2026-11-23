@@ -104,14 +104,14 @@ export default function Dashboard() {
     { label: tr("Messages sent", "رسائل مُرسلة"), value: n(totals.sent), spark: daily.map((d) => d.sent), sub: tr(`last ${DAYS} days`, `آخر ${DAYS} يوماً`) },
     { label: tr("Delivered", "نسبة الوصول"), value: `${pct(totals.delivered, totals.sent)}%`, spark: null, sub: `${n(totals.delivered)} ${tr("messages", "رسالة")}` },
     { label: tr("Read", "نسبة القراءة"), value: `${pct(totals.read, totals.sent)}%`, spark: daily.map((d) => d.read), sub: `${n(totals.read)} ${tr("messages", "رسالة")}` },
-    { label: tr("Customer replies", "ردود العملاء"), value: n(totals.replies), spark: daily.map((d) => d.replies), color: "#C98A22", href: "/inbox" },
+    { label: tr("Customer replies", "ردود العملاء"), value: n(totals.replies), spark: daily.map((d) => d.replies), href: "/inbox" },
   ];
 
   const funnel = [
-    { label: tr("Sent", "أُرسلت"), v: totals.sent, color: "bg-ink-800" },
-    { label: tr("Delivered", "وصلت"), v: totals.delivered, color: "bg-brand-700" },
-    { label: tr("Read", "قُرئت"), v: totals.read, color: "bg-brand-500" },
-    { label: tr("Replied", "ردّوا"), v: totals.replies, color: "bg-gold-400" },
+    { label: tr("Sent", "أُرسلت"), v: totals.sent, color: "bg-black" },
+    { label: tr("Delivered", "وصلت"), v: totals.delivered, color: "bg-ink-600" },
+    { label: tr("Read", "قُرئت"), v: totals.read, color: "bg-ink-400" },
+    { label: tr("Replied", "ردّوا"), v: totals.replies, color: "bg-ink-300" },
   ];
 
   const steps = [
@@ -126,8 +126,8 @@ export default function Dashboard() {
   const greet = hour >= 5 && hour < 12 ? tr("Good morning", "صباح الخير") : hour >= 12 && hour < 18 ? tr("Good afternoon", "مساء الخير") : tr("Good evening", "مساء الخير");
   const inbound = messages.filter((m) => m.direction === "in").slice(-6).reverse();
   const quality: Record<string, [string, string, string]> = {
-    GREEN: [tr("High", "عالية"), "text-brand-600", "bg-brand-500"],
-    YELLOW: [tr("Medium", "متوسطة"), "text-gold-600", "bg-gold-400"],
+    GREEN: [tr("High", "عالية"), "text-emerald-700", "bg-emerald-500"],
+    YELLOW: [tr("Medium", "متوسطة"), "text-amber-700", "bg-amber-500"],
     RED: [tr("Low", "منخفضة"), "text-red-600", "bg-red-500"],
   };
   const q = quality[health?.info?.quality_rating] || null;
@@ -151,7 +151,7 @@ export default function Dashboard() {
             <div className="font-semibold">{tr("Finish setting up", "أكمل الإعداد")}</div>
             <div className="mt-2 flex items-center gap-2 text-xs text-ink-500">
               <div className="h-1.5 flex-1 rounded-full bg-sand-100">
-                <div className="h-1.5 rounded-full bg-brand-500" style={{ width: `${(doneCount / steps.length) * 100}%` }} />
+                <div className="h-1.5 rounded-full bg-black" style={{ width: `${(doneCount / steps.length) * 100}%` }} />
               </div>
               <span className="num">{doneCount}/{steps.length}</span>
             </div>
@@ -159,7 +159,7 @@ export default function Dashboard() {
           <div className="grid flex-1 gap-1.5 sm:grid-cols-2 xl:grid-cols-5">
             {steps.map((s) => (
               <Link key={s.href} href={s.href} className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-[13px] ${s.done ? "border-transparent text-ink-400" : "border-sand-200 font-medium hover:border-brand-300 hover:bg-brand-50/40"}`}>
-                {s.done ? <CheckCircle2 size={16} className="shrink-0 text-brand-500" /> : <Circle size={16} className="shrink-0 text-sand-300" />}
+                {s.done ? <CheckCircle2 size={16} className="shrink-0 text-black" /> : <Circle size={16} className="shrink-0 text-sand-300" />}
                 <span className={s.done ? "line-through" : ""}>{s.label}</span>
               </Link>
             ))}
@@ -181,7 +181,7 @@ export default function Dashboard() {
                   <div className="num text-[26px] font-bold leading-none tracking-[-0.02em]">{k.value}</div>
                   {k.sub && <div className="mt-1.5 whitespace-nowrap text-xs text-ink-400">{k.sub}</div>}
                 </div>
-                {k.spark && <Sparkline values={k.spark} color={k.color} />}
+                {k.spark && <Sparkline values={k.spark} />}
               </div>
             </div>
           );
@@ -195,18 +195,18 @@ export default function Dashboard() {
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <h2 className="font-semibold">{tr("Message activity", "نشاط الرسائل")}</h2>
             <div className="flex gap-4 text-xs text-ink-500">
-              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-brand-500" />{tr("Sent", "أُرسلت")}</span>
-              <span className="flex items-center gap-1.5"><span className="h-0.5 w-3 bg-ink-800" />{tr("Read", "قُرئت")}</span>
-              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-gold-400" />{tr("Replies", "ردود")}</span>
+              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-black" />{tr("Sent", "أُرسلت")}</span>
+              <span className="flex items-center gap-1.5"><span className="h-0.5 w-3 border-t-2 border-dashed border-ink-400" />{tr("Read", "قُرئت")}</span>
+              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-ink-300" />{tr("Replies", "ردود")}</span>
             </div>
           </div>
           <TimeChart
             height={300}
             data={daily}
             series={[
-              { key: "sent", label: tr("Sent", "أُرسلت"), color: "#14906A", kind: "area" },
-              { key: "read", label: tr("Read", "قُرئت"), color: "#15262E", kind: "line" },
-              { key: "replies", label: tr("Replies", "ردود"), color: "#E2A33B", kind: "bar" },
+              { key: "sent", label: tr("Sent", "أُرسلت"), color: "#000000", kind: "area" },
+              { key: "read", label: tr("Read", "قُرئت"), color: "#7A7A78", kind: "line" },
+              { key: "replies", label: tr("Replies", "ردود"), color: "#BDBDBB", kind: "bar" },
             ]}
           />
         </div>
@@ -298,7 +298,7 @@ export default function Dashboard() {
                     <td className="px-5 py-3">
                       <div className="flex items-center justify-end gap-2">
                         <div className="hidden h-1.5 w-16 rounded-full bg-sand-100 sm:block">
-                          <div className="h-1.5 rounded-full bg-brand-500" style={{ width: `${pct(b.read, b.total)}%` }} />
+                          <div className="h-1.5 rounded-full bg-black" style={{ width: `${pct(b.read, b.total)}%` }} />
                         </div>
                         <span className="num w-10 text-end font-semibold">{b.status === "scheduled" ? "—" : `${Math.round(pct(b.read, b.total))}%`}</span>
                       </div>

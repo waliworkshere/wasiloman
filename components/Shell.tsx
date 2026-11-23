@@ -68,24 +68,24 @@ export function Shell({ children }: { children: ReactNode }) {
   const sidebar = (
     <div className="flex h-full flex-col text-[13.5px]">
       <div className="px-4 pb-4 pt-5">
-        <Logo light size={32} />
+        <Logo light size={26} />
       </div>
 
       {/* Workspace / number */}
       <div className="mx-3 mb-4 rounded-lg border border-white/10 bg-white/[0.04] p-3">
         {account ? (
           <div className="flex items-center gap-2.5">
-            <div className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-gold-400 text-sm font-bold text-ink-950">{initial}</div>
+            <div className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-white text-sm font-bold text-black">{initial}</div>
             <div className="min-w-0">
               <div className="truncate font-semibold text-white">{account.verified_name}</div>
               <div className="flex items-center gap-1.5 text-2xs text-ink-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand-300" />
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                 <span dir="ltr" className="num truncate">{account.display_phone}</span>
               </div>
             </div>
           </div>
         ) : (
-          <Link href="/connect" onClick={() => setOpen(false)} className="flex items-center gap-2 font-semibold text-gold-400">
+          <Link href="/connect" onClick={() => setOpen(false)} className="flex items-center gap-2 font-semibold text-white">
             <Plug size={15} /> {tr("Connect WhatsApp", "اربط واتساب")}
           </Link>
         )}
@@ -107,10 +107,10 @@ export function Shell({ children }: { children: ReactNode }) {
                       active ? "bg-white/[0.08] text-white" : "text-ink-300 hover:bg-white/[0.04] hover:text-white"
                     }`}
                   >
-                    {active && <span className="absolute inset-y-1.5 start-0 w-[3px] rounded-full bg-brand-300" />}
-                    <n.icon size={17} strokeWidth={active ? 2.2 : 1.8} className={active ? "text-brand-300" : ""} />
+                    {active && <span className="absolute inset-y-1.5 start-0 w-[3px] rounded-full bg-white" />}
+                    <n.icon size={17} strokeWidth={active ? 2.2 : 1.8} className={active ? "text-white" : ""} />
                     <span className="flex-1">{n.label}</span>
-                    {n.count > 0 && <span className="num rounded-full bg-brand-500 px-1.5 text-2xs font-bold text-white">{n.count}</span>}
+                    {n.count > 0 && <span className="num rounded-full bg-white px-1.5 text-2xs font-bold text-black">{n.count}</span>}
                   </Link>
                 );
               })}
@@ -122,7 +122,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="space-y-0.5 border-t border-white/10 p-3">
         <Link href="/billing" onClick={() => setOpen(false)} className={`flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium ${path.startsWith("/billing") ? "bg-white/[0.08] text-white" : "text-ink-300 hover:text-white"}`}>
           <CreditCard size={17} strokeWidth={1.8} /> <span className="flex-1">{tr("Plan and billing", "الخطة والفوترة")}</span>
-          <span className="rounded bg-gold-400/15 px-1.5 text-2xs font-semibold text-gold-400">{tr("Unlimited", "غير محدود")}</span>
+          <span className="rounded bg-white/10 px-1.5 text-2xs font-semibold text-white">{tr("Unlimited", "غير محدود")}</span>
         </Link>
         <Link href="/settings" onClick={() => setOpen(false)} className={`flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium ${path.startsWith("/settings") ? "bg-white/[0.08] text-white" : "text-ink-300 hover:text-white"}`}>
           <Settings size={17} strokeWidth={1.8} /> {tr("Settings", "الإعدادات")}
@@ -157,7 +157,7 @@ export function Shell({ children }: { children: ReactNode }) {
 
       <div className="min-w-0 flex-1">
         {demo && (
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 bg-gold-400 px-4 py-2 text-[13px] font-medium text-ink-950">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 border-b border-sand-200 bg-white px-4 py-2 text-[13px] font-medium text-black">
             <span className="flex items-center gap-1.5"><Sparkles size={14} /> {tr("You're exploring a demo workspace with sample data. Nothing is really sent.", "أنت تتصفح مساحة تجريبية ببيانات نموذجية. لا يتم إرسال أي شيء فعلياً.")}</span>
             <Link href="/login?mode=signup" onClick={() => exitDemo()} className="rounded-md bg-ink-950 px-2.5 py-1 text-xs font-semibold text-white hover:bg-ink-800">
               {tr("Create your free account", "أنشئ حسابك المجاني")}

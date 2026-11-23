@@ -68,7 +68,7 @@ export default function BotsPage() {
                   <div className="flex items-center gap-2 font-semibold"><Bot size={18} className="text-brand-600" />{f.name}</div>
                   <div className="mt-2 flex flex-wrap gap-1">
                     {f.match_type === "any" ? (
-                      <span className="badge bg-gold-400/15 text-gold-600">{tr("Replies to any message", "يرد على أي رسالة")}</span>
+                      <span className="badge bg-sand-100 text-black">{tr("Replies to any message", "يرد على أي رسالة")}</span>
                     ) : (
                       f.keywords.slice(0, 6).map((k: string) => <span key={k} className="badge bg-sand-100 text-ink-700">{k}</span>)
                     )}

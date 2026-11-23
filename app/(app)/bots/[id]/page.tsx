@@ -27,12 +27,12 @@ import { Loading, Spinner, Toast } from "@/components/ui";
 type RFNode = Node<FlowNodeData & Record<string, unknown>, FlowNodeType>;
 
 const META: Record<FlowNodeType, { icon: any; color: string; en: string; ar: string; hintEn: string; hintAr: string }> = {
-  start: { icon: Play, color: "bg-brand-600", en: "Start", ar: "البداية", hintEn: "The bot starts here when a keyword is received.", hintAr: "يبدأ الرد الآلي هنا عند استلام كلمة مفتاحية." },
-  message: { icon: MessageSquare, color: "bg-sky-500", en: "Send message", ar: "إرسال رسالة", hintEn: "Sends text (and an optional image).", hintAr: "يرسل نصاً (وصورة اختيارية)." },
-  choices: { icon: ListChecks, color: "bg-violet-500", en: "Buttons / Menu", ar: "أزرار / قائمة", hintEn: "Customer taps an option. Up to 3 = buttons, 4–10 = list.", hintAr: "يضغط العميل على خيار. حتى ٣ = أزرار، ٤–١٠ = قائمة." },
-  question: { icon: HelpCircle, color: "bg-amber-500", en: "Ask a question", ar: "طرح سؤال", hintEn: "Waits for the answer and saves it to the contact.", hintAr: "ينتظر الإجابة ويحفظها في جهة الاتصال." },
-  tag: { icon: Tag, color: "bg-emerald-500", en: "Add tag", ar: "إضافة وسم", hintEn: "Adds a tag to the contact (e.g. “interested”).", hintAr: "يضيف وسماً لجهة الاتصال (مثل «مهتم»)." },
-  handoff: { icon: Headset, color: "bg-rose-500", en: "Talk to staff", ar: "تحويل لموظف", hintEn: "Ends the bot and tags the chat for a human to reply.", hintAr: "ينهي الرد الآلي ويحوّل المحادثة لموظف." },
+  start: { icon: Play, color: "bg-black", en: "Start", ar: "البداية", hintEn: "The bot starts here when a keyword is received.", hintAr: "يبدأ الرد الآلي هنا عند استلام كلمة مفتاحية." },
+  message: { icon: MessageSquare, color: "bg-black", en: "Send message", ar: "إرسال رسالة", hintEn: "Sends text (and an optional image).", hintAr: "يرسل نصاً (وصورة اختيارية)." },
+  choices: { icon: ListChecks, color: "bg-black", en: "Buttons / Menu", ar: "أزرار / قائمة", hintEn: "Customer taps an option. Up to 3 = buttons, 4–10 = list.", hintAr: "يضغط العميل على خيار. حتى ٣ = أزرار، ٤–١٠ = قائمة." },
+  question: { icon: HelpCircle, color: "bg-black", en: "Ask a question", ar: "طرح سؤال", hintEn: "Waits for the answer and saves it to the contact.", hintAr: "ينتظر الإجابة ويحفظها في جهة الاتصال." },
+  tag: { icon: Tag, color: "bg-black", en: "Add tag", ar: "إضافة وسم", hintEn: "Adds a tag to the contact (e.g. “interested”).", hintAr: "يضيف وسماً لجهة الاتصال (مثل «مهتم»)." },
+  handoff: { icon: Headset, color: "bg-black", en: "Talk to staff", ar: "تحويل لموظف", hintEn: "Ends the bot and tags the chat for a human to reply.", hintAr: "ينهي الرد الآلي ويحوّل المحادثة لموظف." },
 };
 
 function NodeCard({ type, data, selected, children }: { type: FlowNodeType; data: FlowNodeData; selected?: boolean; children?: React.ReactNode }) {
@@ -46,8 +46,8 @@ function NodeCard({ type, data, selected, children }: { type: FlowNodeType; data
         <span className="text-xs font-bold text-ink-700">{tr(m.en, m.ar)}</span>
       </div>
       <div className="px-3 py-2.5 text-xs text-ink-500" dir="auto">
-        {type === "tag" ? <span className="badge bg-emerald-50 text-emerald-700">{data.tag || "…"}</span> : type === "start" ? tr("When a keyword arrives", "عند وصول كلمة مفتاحية") : <p className="line-clamp-3 whitespace-pre-wrap">{data.text || tr("Click to write…", "اضغط للكتابة…")}</p>}
-        {type === "question" && data.saveAs && <div className="mt-1.5 font-mono text-[10px] text-amber-700">→ {data.saveAs}</div>}
+        {type === "tag" ? <span className="badge bg-sand-100 text-black">{data.tag || "…"}</span> : type === "start" ? tr("When a keyword arrives", "عند وصول كلمة مفتاحية") : <p className="line-clamp-3 whitespace-pre-wrap">{data.text || tr("Click to write…", "اضغط للكتابة…")}</p>}
+        {type === "question" && data.saveAs && <div className="mt-1.5 font-mono text-[10px] text-ink-500">→ {data.saveAs}</div>}
       </div>
       {children}
     </div>
@@ -57,25 +57,25 @@ function NodeCard({ type, data, selected, children }: { type: FlowNodeType; data
 const nodeTypes = {
   start: ({ data, selected }: NodeProps<RFNode>) => (
     <NodeCard type="start" data={data} selected={selected}>
-      <Handle type="source" position={Position.Bottom} id="next" className="!bg-brand-600" />
+      <Handle type="source" position={Position.Bottom} id="next" className="!bg-black" />
     </NodeCard>
   ),
   message: ({ data, selected }: NodeProps<RFNode>) => (
     <NodeCard type="message" data={data} selected={selected}>
       <Handle type="target" position={Position.Top} className="!bg-ink-400" />
-      <Handle type="source" position={Position.Bottom} id="next" className="!bg-sky-500" />
+      <Handle type="source" position={Position.Bottom} id="next" className="!bg-black" />
     </NodeCard>
   ),
   question: ({ data, selected }: NodeProps<RFNode>) => (
     <NodeCard type="question" data={data} selected={selected}>
       <Handle type="target" position={Position.Top} className="!bg-ink-400" />
-      <Handle type="source" position={Position.Bottom} id="next" className="!bg-amber-500" />
+      <Handle type="source" position={Position.Bottom} id="next" className="!bg-black" />
     </NodeCard>
   ),
   tag: ({ data, selected }: NodeProps<RFNode>) => (
     <NodeCard type="tag" data={data} selected={selected}>
       <Handle type="target" position={Position.Top} className="!bg-ink-400" />
-      <Handle type="source" position={Position.Bottom} id="next" className="!bg-emerald-500" />
+      <Handle type="source" position={Position.Bottom} id="next" className="!bg-black" />
     </NodeCard>
   ),
   handoff: ({ data, selected }: NodeProps<RFNode>) => (
@@ -88,9 +88,9 @@ const nodeTypes = {
       <Handle type="target" position={Position.Top} className="!bg-ink-400" />
       <div className="space-y-1 px-3 pb-3">
         {(data.options || []).map((o, i) => (
-          <div key={i} className="relative rounded-lg border border-violet-200 bg-violet-50 px-2.5 py-1.5 text-xs font-medium text-violet-800" dir="auto">
+          <div key={i} className="relative rounded-lg border border-sand-200 bg-sand-50 px-2.5 py-1.5 text-xs font-medium text-black" dir="auto">
             {o || "…"}
-            <Handle type="source" position={Position.Right} id={`opt-${i}`} className="!-right-[19px] !bg-violet-500" />
+            <Handle type="source" position={Position.Right} id={`opt-${i}`} className="!-right-[19px] !bg-black" />
           </div>
         ))}
       </div>
