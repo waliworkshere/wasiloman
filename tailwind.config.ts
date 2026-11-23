@@ -11,6 +11,7 @@ export default {
     extend: {
       colors: {
         canvas: "#F4F4F3",
+        accent: { DEFAULT: "#EB501A", 600: "#D4430F", 700: "#B8380B", 50: "#FDEEE8", 100: "#FBD9CB" },
         // "brand" is now the black action colour
         brand: {
           50: "#F2F2F2",

@@ -75,7 +75,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="mx-3 mb-4 rounded-lg border border-white/10 bg-white/[0.04] p-3">
         {account ? (
           <div className="flex items-center gap-2.5">
-            <div className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-white text-sm font-bold text-black">{initial}</div>
+            <div className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-accent text-sm font-bold text-white">{initial}</div>
             <div className="min-w-0">
               <div className="truncate font-semibold text-white">{account.verified_name}</div>
               <div className="flex items-center gap-1.5 text-2xs text-ink-300">
@@ -107,10 +107,10 @@ export function Shell({ children }: { children: ReactNode }) {
                       active ? "bg-white/[0.08] text-white" : "text-ink-300 hover:bg-white/[0.04] hover:text-white"
                     }`}
                   >
-                    {active && <span className="absolute inset-y-1.5 start-0 w-[3px] rounded-full bg-white" />}
-                    <n.icon size={17} strokeWidth={active ? 2.2 : 1.8} className={active ? "text-white" : ""} />
+                    {active && <span className="absolute inset-y-1.5 start-0 w-[3px] rounded-full bg-accent" />}
+                    <n.icon size={17} strokeWidth={active ? 2.2 : 1.8} className={active ? "text-accent" : ""} />
                     <span className="flex-1">{n.label}</span>
-                    {n.count > 0 && <span className="num rounded-full bg-white px-1.5 text-2xs font-bold text-black">{n.count}</span>}
+                    {n.count > 0 && <span className="num rounded-full bg-accent px-1.5 text-2xs font-bold text-white">{n.count}</span>}
                   </Link>
                 );
               })}
@@ -122,7 +122,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="space-y-0.5 border-t border-white/10 p-3">
         <Link href="/billing" onClick={() => setOpen(false)} className={`flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium ${path.startsWith("/billing") ? "bg-white/[0.08] text-white" : "text-ink-300 hover:text-white"}`}>
           <CreditCard size={17} strokeWidth={1.8} /> <span className="flex-1">{tr("Plan and billing", "الخطة والفوترة")}</span>
-          <span className="rounded bg-white/10 px-1.5 text-2xs font-semibold text-white">{tr("Unlimited", "غير محدود")}</span>
+          <span className="rounded bg-accent px-1.5 text-2xs font-semibold text-white">{tr("Unlimited", "غير محدود")}</span>
         </Link>
         <Link href="/settings" onClick={() => setOpen(false)} className={`flex items-center gap-2.5 rounded-md px-2.5 py-2 font-medium ${path.startsWith("/settings") ? "bg-white/[0.08] text-white" : "text-ink-300 hover:text-white"}`}>
           <Settings size={17} strokeWidth={1.8} /> {tr("Settings", "الإعدادات")}

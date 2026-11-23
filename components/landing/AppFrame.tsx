@@ -12,7 +12,7 @@ function Spark({ v }: { v: number[] }) {
   const pts = v.map((x, i) => `${(i / (v.length - 1)) * 64},${22 - (x / m) * 20}`).join(" ");
   return (
     <svg width="64" height="24" viewBox="0 0 64 24" aria-hidden style={{ direction: "ltr" }}>
-      <polyline points={pts} fill="none" stroke="#000" strokeWidth="1.5" strokeLinejoin="round" />
+      <polyline points={pts} fill="none" stroke="#EB501A" strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -75,8 +75,8 @@ export function AppFrame() {
               <div className="mb-2 font-semibold text-black">{tr("Message activity", "نشاط الرسائل")}</div>
               <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" aria-hidden style={{ direction: "ltr" }}>
                 {[0.25, 0.5, 0.75, 1].map((t) => <line key={t} x1="0" x2={W} y1={y(max * t)} y2={y(max * t)} stroke="#ECECEB" />)}
-                <path d={`${line(SENT)} L${W},${H} L0,${H} Z`} fill="#000" opacity="0.06" />
-                <path d={line(SENT)} fill="none" stroke="#000" strokeWidth="2" />
+                <path d={`${line(SENT)} L${W},${H} L0,${H} Z`} fill="#EB501A" opacity="0.1" />
+                <path d={line(SENT)} fill="none" stroke="#EB501A" strokeWidth="2" />
                 <path d={line(READ)} fill="none" stroke="#000" strokeWidth="1.5" strokeDasharray="4 4" />
               </svg>
             </div>

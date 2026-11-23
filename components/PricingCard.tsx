@@ -89,7 +89,7 @@ export function PricingPlans({ current }: { current?: string }) {
               <div className="flex min-h-[28px] items-center justify-between gap-3">
                 <h3 className="text-[17px] font-semibold">{p.name}</h3>
                 {p.offer && (
-                  <span className="rounded-full border border-white/30 px-2.5 py-1 text-[11.5px] font-medium text-white">
+                  <span className="rounded-full bg-accent px-2.5 py-1 text-[11.5px] font-semibold text-white">
                     {tr("National Day offer", "عرض العيد الوطني")} 🇴🇲
                   </span>
                 )}
@@ -104,7 +104,7 @@ export function PricingPlans({ current }: { current?: string }) {
                 href={p.href}
                 target={p.href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
-                className={`btn mt-7 w-full py-3 text-[14px] ${dark ? "bg-white text-black hover:bg-white/85" : "border border-black bg-white text-black hover:bg-black hover:text-white"}`}
+                className={`btn mt-7 w-full py-3 text-[14px] ${dark ? "bg-accent font-semibold text-white hover:bg-accent-600" : "border border-black bg-white text-black hover:bg-black hover:text-white"}`}
               >
                 {p.cta} <ArrowUpRight size={15} className="rtl:-scale-x-100" />
               </a>
@@ -113,7 +113,7 @@ export function PricingPlans({ current }: { current?: string }) {
                 <ul className="space-y-2.5">
                   {p.features.map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-[14px] leading-snug">
-                      <Check size={16} strokeWidth={2.2} className={`mt-0.5 shrink-0 ${dark ? "text-white" : "text-black"}`} />
+                      <Check size={16} strokeWidth={2.2} className={`mt-0.5 shrink-0 ${dark ? "text-accent" : "text-black"}`} />
                       <span className={dark ? "text-white/85" : "text-ink-700"}>{f}</span>
                     </li>
                   ))}

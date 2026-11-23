@@ -105,7 +105,7 @@ export function TimeChart({ data, series, height = H }: { data: Point[]; series:
   );
 }
 
-export function Sparkline({ values, color = "#000" }: { values: number[]; color?: string }) {
+export function Sparkline({ values, color = "#EB501A" }: { values: number[]; color?: string }) {
   const w = 72, h = 26;
   const max = Math.max(1, ...values);
   const pts = values.map((v, i) => `${(i / Math.max(1, values.length - 1)) * w},${h - 2 - (v / max) * (h - 4)}`).join(" ");

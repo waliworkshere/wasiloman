@@ -110,7 +110,7 @@ export default function Dashboard() {
   const funnel = [
     { label: tr("Sent", "أُرسلت"), v: totals.sent, color: "bg-black" },
     { label: tr("Delivered", "وصلت"), v: totals.delivered, color: "bg-ink-600" },
-    { label: tr("Read", "قُرئت"), v: totals.read, color: "bg-ink-400" },
+    { label: tr("Read", "قُرئت"), v: totals.read, color: "bg-accent" },
     { label: tr("Replied", "ردّوا"), v: totals.replies, color: "bg-ink-300" },
   ];
 
@@ -151,7 +151,7 @@ export default function Dashboard() {
             <div className="font-semibold">{tr("Finish setting up", "أكمل الإعداد")}</div>
             <div className="mt-2 flex items-center gap-2 text-xs text-ink-500">
               <div className="h-1.5 flex-1 rounded-full bg-sand-100">
-                <div className="h-1.5 rounded-full bg-black" style={{ width: `${(doneCount / steps.length) * 100}%` }} />
+                <div className="h-1.5 rounded-full bg-accent" style={{ width: `${(doneCount / steps.length) * 100}%` }} />
               </div>
               <span className="num">{doneCount}/{steps.length}</span>
             </div>
@@ -195,8 +195,8 @@ export default function Dashboard() {
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <h2 className="font-semibold">{tr("Message activity", "نشاط الرسائل")}</h2>
             <div className="flex gap-4 text-xs text-ink-500">
-              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-black" />{tr("Sent", "أُرسلت")}</span>
-              <span className="flex items-center gap-1.5"><span className="h-0.5 w-3 border-t-2 border-dashed border-ink-400" />{tr("Read", "قُرئت")}</span>
+              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-accent" />{tr("Sent", "أُرسلت")}</span>
+              <span className="flex items-center gap-1.5"><span className="h-0.5 w-3 border-t-2 border-dashed border-black" />{tr("Read", "قُرئت")}</span>
               <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-ink-300" />{tr("Replies", "ردود")}</span>
             </div>
           </div>
@@ -204,8 +204,8 @@ export default function Dashboard() {
             height={300}
             data={daily}
             series={[
-              { key: "sent", label: tr("Sent", "أُرسلت"), color: "#000000", kind: "area" },
-              { key: "read", label: tr("Read", "قُرئت"), color: "#7A7A78", kind: "line" },
+              { key: "sent", label: tr("Sent", "أُرسلت"), color: "#EB501A", kind: "area" },
+              { key: "read", label: tr("Read", "قُرئت"), color: "#000000", kind: "line" },
               { key: "replies", label: tr("Replies", "ردود"), color: "#BDBDBB", kind: "bar" },
             ]}
           />
@@ -298,7 +298,7 @@ export default function Dashboard() {
                     <td className="px-5 py-3">
                       <div className="flex items-center justify-end gap-2">
                         <div className="hidden h-1.5 w-16 rounded-full bg-sand-100 sm:block">
-                          <div className="h-1.5 rounded-full bg-black" style={{ width: `${pct(b.read, b.total)}%` }} />
+                          <div className="h-1.5 rounded-full bg-accent" style={{ width: `${pct(b.read, b.total)}%` }} />
                         </div>
                         <span className="num w-10 text-end font-semibold">{b.status === "scheduled" ? "—" : `${Math.round(pct(b.read, b.total))}%`}</span>
                       </div>

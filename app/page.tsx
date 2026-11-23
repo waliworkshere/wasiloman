@@ -107,7 +107,7 @@ export default function Landing() {
               <a href="#pricing" className="btn h-12 border border-black px-6 text-[15px] text-black hover:bg-black hover:text-white">{tr("See the plans", "اطّلع على الخطط")}</a>
             </div>
             <p className="mt-8 border-t border-sand-200 pt-5 text-[14px] text-ink-500">
-              <span className="font-medium text-black">{tr("$150 a month", "١٥٠ دولاراً شهرياً")}</span>{" "}
+              <span className="font-semibold text-accent">{tr("$150 a month", "١٥٠ دولاراً شهرياً")}</span>{" "}
               {tr("for the National Day offer, with no limit on messages or contacts.", "في عرض العيد الوطني، بلا حدود للرسائل أو جهات الاتصال.")}
             </p>
           </div>
@@ -117,7 +117,7 @@ export default function Landing() {
             <div className="absolute -bottom-6 start-4 w-[min(300px,82%)] rounded-xl border border-black/10 bg-white p-4 shadow-pop sm:-start-8">
               <div className="flex items-center justify-between text-[12px] text-ink-500">
                 <span>{tr("Bulk message", "رسالة جماعية")}</span>
-                <span className="flex items-center gap-1 text-black"><CheckCheck size={14} /> {tr("Done", "اكتملت")}</span>
+                <span className="flex items-center gap-1 font-medium text-accent"><CheckCheck size={14} /> {tr("Done", "اكتملت")}</span>
               </div>
               <div className="mt-1 text-[15px] font-semibold">{tr("National Day halwa offer", "عرض الحلوى للعيد الوطني")}</div>
               <div className="mt-3 grid grid-cols-3 gap-2 text-[12px]">
@@ -128,7 +128,7 @@ export default function Landing() {
                   </div>
                 ))}
               </div>
-              <div className="mt-3 h-1.5 rounded-full bg-sand-100"><div className="h-1.5 w-[71%] rounded-full bg-black" /></div>
+              <div className="mt-3 h-1.5 rounded-full bg-sand-100"><div className="h-1.5 w-[71%] rounded-full bg-accent" /></div>
             </div>
           </div>
         </section>
@@ -198,7 +198,7 @@ export default function Landing() {
               <div className="flex flex-col rounded-2xl border border-sand-200 bg-white p-6 transition-transform hover:-translate-y-0.5">
                 <div className="rounded-xl border border-sand-200 p-4 text-[13px]">
                   <div className="flex justify-between text-ink-500"><span>{tr("Sending to 1,180 contacts", "جارٍ الإرسال إلى ١١٨٠ جهة")}</span><span className="num text-black">64%</span></div>
-                  <div className="mt-3 h-2 overflow-hidden rounded-full bg-sand-100"><div className="h-2 w-[64%] rounded-full bg-black" /></div>
+                  <div className="mt-3 h-2 overflow-hidden rounded-full bg-sand-100"><div className="h-2 w-[64%] rounded-full bg-accent" /></div>
                   <div className="mt-4 grid grid-cols-3 text-center">
                     {[["754", tr("sent", "أُرسلت")], ["731", tr("delivered", "وصلت")], ["9", tr("failed", "فشلت")]].map(([v, l]) => (
                       <div key={l}><div className="num text-[17px] font-semibold">{v}</div><div className="text-[11.5px] text-ink-500">{l}</div></div>
@@ -211,7 +211,7 @@ export default function Landing() {
               <div className="flex flex-col rounded-2xl border border-sand-200 bg-white p-6 transition-transform hover:-translate-y-0.5">
                 <div className="space-y-2 rounded-xl border border-sand-200 bg-sand-50 p-4 text-[13px]" dir="rtl" style={{ fontFamily: "var(--font-arabic)" }}>
                   <div className="max-w-[85%] rounded-lg rounded-ss-none bg-white px-3 py-2 shadow-sm">هل العرض متوفر في فرع الخوير؟</div>
-                  <div className="ms-auto max-w-[85%] rounded-lg rounded-se-none bg-black px-3 py-2 text-white">نعم، حتى نهاية الأسبوع في كل الفروع 🌙</div>
+                  <div className="ms-auto max-w-[85%] rounded-lg rounded-se-none bg-accent px-3 py-2 text-white">نعم، حتى نهاية الأسبوع في كل الفروع 🌙</div>
                   <div className="max-w-[60%] rounded-lg rounded-ss-none bg-white px-3 py-2 shadow-sm">ممتاز، شكراً</div>
                 </div>
                 <h3 className="mt-7 text-[18px] font-semibold">{tr("One inbox", "صندوق محادثات واحد")}</h3>
@@ -219,7 +219,7 @@ export default function Landing() {
               </div>
               <div className="flex flex-col rounded-2xl border border-sand-200 bg-white p-6 transition-transform hover:-translate-y-0.5">
                 <div className="rounded-xl border border-sand-200 p-4 text-[13px]">
-                  <span className="rounded-md bg-black px-2 py-1 text-[11.5px] text-white">{tr("Keyword", "كلمة")}: menu</span>
+                  <span className="rounded-md bg-accent px-2 py-1 text-[11.5px] font-medium text-white">{tr("Keyword", "كلمة")}: menu</span>
                   <div className="ms-4 h-4 border-s border-dashed border-ink-300" />
                   <div className="rounded-lg border border-sand-200 px-3 py-2">{tr("Marhaba! How can we help?", "أهلاً! كيف نقدر نساعدك؟")}</div>
                   <div className="mt-2 flex flex-wrap gap-1.5">
@@ -249,7 +249,7 @@ export default function Landing() {
                 [tr("Send, then watch the replies", "أرسل، وتابع الردود"), tr("Your message goes to Meta for approval, usually within minutes. Then it goes to everyone.", "تُرسل رسالتك إلى ميتا للموافقة، عادةً خلال دقائق. ثم تصل إلى الجميع.")],
               ].map(([t, d], i) => (
                 <li key={t} className="grid grid-cols-[40px_1fr] gap-4">
-                  <span className="num grid h-10 w-10 place-items-center rounded-full border border-black text-[15px] font-medium">{i + 1}</span>
+                  <span className="num grid h-10 w-10 place-items-center rounded-full bg-accent text-[15px] font-semibold text-white">{i + 1}</span>
                   <div>
                     <h3 className="text-[18px] font-semibold">{t}</h3>
                     <p className="mt-1.5 text-[15px] leading-[1.55] text-ink-500">{d}</p>
@@ -282,14 +282,14 @@ export default function Landing() {
 
         {/* 7 — Close */}
         <section className="relative isolate min-h-[100svh] overflow-hidden bg-black text-white">
-          <img src="/photos/photo-f165815865.jpg" srcSet="/photos/photo-f165815865-960.jpg 960w, /photos/photo-f165815865.jpg 1280w" sizes="100vw" alt={tr("Old Muscat between the mountains and the sea", "مسقط القديمة بين الجبال والبحر")} loading="lazy" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-55 grayscale" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/40 to-transparent" />
+          <img src="/photos/photo-f165815865.jpg" srcSet="/photos/photo-f165815865-960.jpg 960w, /photos/photo-f165815865.jpg 1280w" sizes="100vw" alt={tr("Old Muscat between the mountains and the sea", "مسقط القديمة بين الجبال والبحر")} loading="lazy" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-70" />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/50 to-black/10" />
           <div className="mx-auto flex min-h-[100svh] max-w-[1240px] flex-col justify-end px-6 pb-20 pt-32">
             <h2 className="max-w-[16ch] text-[40px] font-medium leading-[1.02] tracking-[-0.045em] sm:text-[60px] lg:text-[76px]">
               {tr("Your next offer can reach every customer tonight.", "عرضك القادم يمكن أن يصل لكل عملائك الليلة.")}
             </h2>
             <div className="mt-10 flex flex-wrap gap-3">
-              <button onClick={demo} className="btn h-12 bg-white px-6 text-[15px] text-black hover:bg-white/85">{tr("Open the demo", "افتح العرض التجريبي")}</button>
+              <button onClick={demo} className="btn-primary h-12 px-6 text-[15px]">{tr("Open the demo", "افتح العرض التجريبي")}</button>
               <Link href="/login?mode=signup" className="btn h-12 border border-white/40 px-6 text-[15px] text-white hover:bg-white hover:text-black">{tr("Create your account", "أنشئ حسابك")}</Link>
             </div>
           </div>
