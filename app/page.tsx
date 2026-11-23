@@ -27,7 +27,6 @@ function Photo({ id, alt, big = true, sizes = "50vw", className = "", priority =
 }
 
 const CREDITS = [
-  ["Simo.Albo80", "https://commons.wikimedia.org/wiki/File:Uomo_omanita_in_abito_tradizionale_con_khanjar_al_Souq_di_Sinaw_(Oman).jpg", "CC BY-SA 4.0"],
   ["Andries Oudshoorn", "https://commons.wikimedia.org/wiki/File:Muttrah_(4).jpg", "CC BY-SA 2.0"],
   ["Ji-Elle", "https://commons.wikimedia.org/wiki/File:Nizwa-Tailors_(1).jpg", "CC BY-SA 3.0"],
   ["Fabio Achilli", "https://commons.wikimedia.org/wiki/File:Nizwa_craft_market_(37125080815).jpg", "CC BY 2.0"],
@@ -113,8 +112,17 @@ export default function Landing() {
           </div>
 
           <div className="enter relative mx-auto w-full max-w-[520px] lg:max-w-none">
-            <Photo id="f183280244" big={false} priority sizes="(max-width: 1023px) 100vw, 45vw" alt={tr("An Omani man in a white dishdasha and massar, seated at a souq", "رجل عُماني بالدشداشة البيضاء والمصر، جالس في سوق")} className="aspect-[4/5] rounded-2xl" />
-            <div className="absolute -bottom-6 start-4 w-[min(300px,82%)] rounded-xl border border-black/10 bg-white p-4 shadow-pop sm:-start-8">
+            <div className="photo aspect-[4/5] rounded-2xl">
+              <img
+                src="/photos/hero-960.jpg"
+                srcSet="/photos/hero-500.jpg 500w, /photos/hero-960.jpg 960w, /photos/hero-1280.jpg 1280w"
+                sizes="(max-width: 1023px) 100vw, 45vw"
+                alt={tr("A young Omani man in a dishdasha and kuma reading WhatsApp messages on his phone in a café", "شاب عُماني بالدشداشة والكمّة يقرأ رسائل واتساب على هاتفه في مقهى")}
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <div className="absolute -bottom-6 end-4 w-[min(270px,78%)] rounded-xl border border-black/10 bg-white p-4 shadow-pop sm:-end-8">
               <div className="flex items-center justify-between text-[12px] text-ink-500">
                 <span>{tr("Bulk message", "رسالة جماعية")}</span>
                 <span className="flex items-center gap-1 font-medium text-accent"><CheckCheck size={14} /> {tr("Done", "اكتملت")}</span>
@@ -309,7 +317,7 @@ export default function Landing() {
           </div>
           <p className="mt-8 text-[12px] leading-relaxed text-white/40">
             © {new Date().getFullYear()} WasilOman. {tr("Not affiliated with WhatsApp or Meta.", "غير تابع لواتساب أو ميتا.")}{" "}
-            {tr("Photographs from Wikimedia Commons by", "الصور من ويكيميديا كومنز بعدسة")}{" "}
+            {tr("Other photographs from Wikimedia Commons by", "الصور الأخرى من ويكيميديا كومنز بعدسة")}{" "}
             {CREDITS.map(([by, url, lic], i) => (
               <span key={url}>
                 <a href={url} target="_blank" rel="noreferrer" className="underline decoration-white/20 underline-offset-2 hover:text-white">{by}</a> ({lic}){i < CREDITS.length - 1 ? ", " : "."}
